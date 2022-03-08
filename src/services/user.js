@@ -10,10 +10,11 @@ const CURR_USER = 'curr_user' /* the current active user */
 // }
 
 const addUser = (new_user) => {
-  // used in sign in
+  console.log('in add user ', new_user)
   let users = getUsers()
   users = [...users, new_user] // this will add it two times tho
-  window.localStorage.setItem(DB_USERS, users)
+  window.localStorage.setItem(DB_USERS, JSON.stringify(users))
+  return true
 }
 
 const getUsers = () => {
@@ -29,13 +30,12 @@ const getCurrentUser = () => {
 }
 
 const logIn = (mail, password) => {
-  // current_user will always change in login
   const user = _findUser(mail, password)
   if (user) {
-    window.localStorage.setItem(CURR_USER, user)
+    window.localStorage.setItem(CURR_USER, JSON.stringify(user))
     return true
   } else {
-    // user data not in db
+    console.error('login failed no user found!')
     return false
   }
 }
@@ -43,7 +43,7 @@ const logIn = (mail, password) => {
 const _findUser = (mail, password) => {
   const users = getUsers()
   const user = users.find(
-    (user) => user.mail === mail && user.password === password
+    (user) => user.email === mail && user.password === password
   )
   return user ? user : null
 }

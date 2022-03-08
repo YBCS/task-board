@@ -1,18 +1,27 @@
 import { useState } from 'react'
-import './LoginForm.css'
-const LoginForm = ({ onLogin, isSignUp }) => {
+import './form.css'
+
+const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    if (email.length < 5) {
+      console.log('email too short')
+      return false
+    }
+    if (password.length < 5) {
+      console.log('password too short')
+      return false
+    }
     onLogin(email, password)
     setEmail('')
     setPassword('')
   }
 
   return (
-    <div className="Login">
+    <div className="form-container">
       <h1>Log in!</h1>
 
       <form onSubmit={handleSubmit}>
@@ -33,8 +42,7 @@ const LoginForm = ({ onLogin, isSignUp }) => {
             id="password"
           />
         </div>
-        <button type="submit">login</button>
-        {isSignUp && <button>signup</button>}
+        <button type="submit">Log in</button>
       </form>
     </div>
   )
