@@ -4,14 +4,14 @@ import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import logo from '../logo.svg'
-import taskService from '../services/task'
-import imageService from '../services/image'
+import {seedData, getTaskListCollections} from '../services/task'
+import {getPicture} from '../services/image'
 
 
 const HeadNav = () => {
   const [photo, setPhoto] = useState(null)
   useEffect(() => {
-      imageService.getPicture().then(p => {
+      getPicture().then(p => {
           setPhoto(p)
       })
   }, [])
@@ -48,9 +48,9 @@ const HeadNav = () => {
 const Taskboard = ({ user }) => {
   const [TLC, setTLC] = useState(null)
   useEffect(() => {
-    taskService.seedData()
+    seedData()
     if (user) {
-      setTLC(taskService.getTaskListCollections(user.username))
+      setTLC(getTaskListCollections(user.username))
     }
   }, [user])
 

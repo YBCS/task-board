@@ -9,7 +9,7 @@ const CURR_USER = 'curr_user' /* the current active user */
 //   password: 'secret'
 // }
 
-const addUser = (new_user) => {
+export function addUser (new_user) {
   console.log('in add user ', new_user)
   let users = getUsers()
   users = [...users, new_user] // this will add it two times tho
@@ -17,7 +17,7 @@ const addUser = (new_user) => {
   return true
 }
 
-const getUsers = () => {
+export function getUsers () {
   const users = window.localStorage.getItem(DB_USERS)
   if (users) {
     return JSON.parse(users)
@@ -25,11 +25,11 @@ const getUsers = () => {
   return []
 }
 
-const getCurrentUser = () => {
+export function getCurrentUser() {
   return JSON.parse(window.localStorage.getItem(CURR_USER))
 }
 
-const logIn = (mail, password) => {
+export function logIn (mail, password) {
   const user = _findUser(mail, password)
   if (user) {
     window.localStorage.setItem(CURR_USER, JSON.stringify(user))
@@ -48,14 +48,8 @@ const _findUser = (mail, password) => {
   return user ? user : null
 }
 
-const clearUser = () => {
-  localStorage.clear()
-}
+// const clearUser = () => {
+//   localStorage.clear()
+// }
 
-export default {
-  addUser,
-  getUsers,
-  getCurrentUser,
-  logIn,
-  clearUser,
-}
+

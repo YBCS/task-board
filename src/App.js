@@ -1,7 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import LoginForm from './components/LoginForm'
-import userService from './services/user'
+import {getCurrentUser, logIn, addUser, } from './services/user'
 import SignupForm from './components/SignupForm'
 import Taskboard from './components/TaskBoard'
 
@@ -13,7 +13,7 @@ function App() {
   const [showtaskboard, setShowTaskBoard] = useState(false)
 
   useEffect(() => {
-    let curr_user = userService.getCurrentUser()
+    let curr_user = getCurrentUser()
     if (curr_user !== null) {
       setUser(curr_user)
       setShowTaskBoard(true)
@@ -23,8 +23,8 @@ function App() {
   }, [])
 
   const login = (email, password) => {
-    if (userService.logIn(email, password)) {
-      setUser(userService.getCurrentUser())
+    if (logIn(email, password)) {
+      setUser(getCurrentUser())
       showTaskBoardComponent()
       console.log('logged in')
     } else {
@@ -34,7 +34,7 @@ function App() {
   }
 
   const singup = (username, email, password) => {
-    if (userService.addUser({ username, email, password })) {
+    if (addUser({ username, email, password })) {
       console.log('user added successfully ')
       showLoginForm()
     } else {

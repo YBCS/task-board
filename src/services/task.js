@@ -5,7 +5,7 @@ const USER1 = 'budha'
 const USER1_MAIl = 'buda@mail.com'
 
 
-const getTaskListCollections = (user_name) => {
+export function getTaskListCollections(user_name) {
   // one user one space
   const _task_list_collections = window.localStorage.getItem(TLCs + user_name)
   if (_task_list_collections) {
@@ -13,7 +13,7 @@ const getTaskListCollections = (user_name) => {
   }
   return []
 }
-const getTaskLists = (user_name) => {
+export function getTaskLists (user_name) {
   // for current user
   const _task_list_collections = getTaskListCollections(user_name)
   if (_task_list_collections) {
@@ -22,7 +22,7 @@ const getTaskLists = (user_name) => {
   }
   return []
 }
-const getTasks = (user_name) => {
+export function getTasks (user_name) {
   // for current user
   const _task_list_collections = getTaskListCollections(user_name)
   if (_task_list_collections) {
@@ -32,7 +32,7 @@ const getTasks = (user_name) => {
   return []
 }
 
-const addTask = (user_name, task, task_list_id) => {
+export function addTask (user_name, task, task_list_id) {
   let _task_lists = getTaskLists(user_name)
 
   _task_lists.forEach((t_l) => {
@@ -46,7 +46,7 @@ const addTask = (user_name, task, task_list_id) => {
   localStorage.setItem(TLCs + user_name, _task_list_collections)
 }
 
-const addTaskList = (task_list_name, user_name) => {
+export function addTaskList(task_list_name, user_name) {
   const empty_task_list = {
     task_list_id: 0, // fix this
     task_list_name: task_list_name,
@@ -57,7 +57,7 @@ const addTaskList = (task_list_name, user_name) => {
   localStorage.setItem(TLCs + user_name, _task_list_collections)
 }
 
-const addTaskListCollection = (user, default_task_list_name) => {
+export function addTaskListCollection(user, default_task_list_name) {
     const empty_task_list = {
         task_list_id: 0, // fix this
         task_list_name: default_task_list_name,
@@ -76,7 +76,7 @@ const addTaskListCollection = (user, default_task_list_name) => {
       localStorage.setItem(TLCs + user.user_name, _task_list_collections)
 }
 
-const seedData = () => {
+export function seedData(){
   // for testing purposes
   // there is one user with one collectoin with 2 task list, one with 3 task and one with 2 task
 //   const empty_collection = {
@@ -158,12 +158,12 @@ const seedData = () => {
 }
 
 
-export default {
-    seedData,
-    addTaskListCollection,
-    addTaskList,
-    addTask,
-    getTasks,
-    getTaskLists,
-    getTaskListCollections,
-}
+// export default {
+//     seedData,
+//     addTaskListCollection,
+//     addTaskList,
+//     addTask,
+//     getTasks,
+//     getTaskLists,
+//     getTaskListCollections,
+// }

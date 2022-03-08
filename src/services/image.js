@@ -2,12 +2,12 @@
 import axios from 'axios'
 
 
-const getPicture = () => {
+export function getPicture() {
     const random_num = getRandomNum()
     const request = axios.get(` https://picsum.photos/id/${random_num}/info`)
     return request.then(response => response.data)
 }
-const getSmallPicture = () => {
+export function getSmallPicture(){
     // needs work
     const random_num = getRandomNum()
     const request = axios.get(` https://picsum.photos/id/${random_num}/200`)
@@ -20,7 +20,7 @@ const getRandomNum = () => {
 
 
 
-export default {
-  getPicture,
-  getSmallPicture,
-}
+// export default {
+//   getPicture,
+//   getSmallPicture,
+// }
