@@ -26,7 +26,7 @@ const getUsers = () => {
 }
 
 const getCurrentUser = () => {
-  return window.localStorage.getItem(CURR_USER)
+  return JSON.parse(window.localStorage.getItem(CURR_USER))
 }
 
 const logIn = (mail, password) => {

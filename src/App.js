@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react'
 import LoginForm from './components/LoginForm'
 import userService from './services/user'
 import SignupForm from './components/SignupForm'
+import Taskboard from './components/TaskBoard'
 
 function App() {
+  const [user, setUser] = useState(null)
   const [showlogin, setShowLogin] = useState(false)
   const [showsignup, setShowSignUp] = useState(false)
   const [showSignUpForm, setShowSignUpForm] = useState(false)
@@ -13,6 +15,7 @@ function App() {
   useEffect(() => {
     let curr_user = userService.getCurrentUser()
     if (curr_user !== null) {
+      setUser(curr_user)
       setShowTaskBoard(true)
     } else {
       setShowLogin(true)
@@ -21,6 +24,7 @@ function App() {
 
   const login = (email, password) => {
     if (userService.logIn(email, password)) {
+      setUser(userService.getCurrentUser())
       showTaskBoardComponent()
       console.log('logged in')
     } else {
@@ -83,7 +87,9 @@ function App() {
         {!showSignUpForm && <button onClick={showForm}>Signup</button>}
         {showSignUpForm && <SignupForm onSignUp={singup} />}
       </div>
-      <div style={showTaskboardWhenVisible}>Taskboard</div>
+      <div style={showTaskboardWhenVisible}>
+        <Taskboard user={user} />
+      </div>
     </>
   )
 }
