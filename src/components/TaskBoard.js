@@ -4,18 +4,16 @@ import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import logo from '../logo.svg'
-import {seedData, getTaskListCollections} from '../services/task'
-import {getPicture} from '../services/image'
-
+import { seedData, getTaskListCollections } from '../services/task'
+import { getPicture } from '../services/image'
 
 const HeadNav = () => {
   const [photo, setPhoto] = useState(null)
   useEffect(() => {
-      getPicture().then(p => {
-          setPhoto(p)
-      })
+    getPicture().then((p) => {
+      setPhoto(p)
+    })
   }, [])
-
 
   return (
     <>
@@ -26,18 +24,21 @@ const HeadNav = () => {
               alt=""
               src={logo}
               width="50"
-              className="d-inline-block align-top"
+              className="d-inline-block align-top App-logo"
             />{' '}
             Taskboard
           </Navbar.Brand>
         </Container>
         <Nav>
-          {/* to replace this image */}
           <img
             alt=""
             src={photo ? photo.download_url : logo}
-            width="70"
-            className="d-inline-block align-top"
+            height="60"
+            className={
+              photo
+                ? 'd-inline-block align-top'
+                : 'd-inline-block align-top App-logo'
+            }
           />{' '}
         </Nav>
       </Navbar>

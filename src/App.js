@@ -38,7 +38,7 @@ function App() {
       console.log('user added successfully ')
       showLoginForm()
     } else {
-      console.log('user add failed ')
+      console.error('user add failed ')
     }
   }
 

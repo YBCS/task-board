@@ -8,11 +8,11 @@ const LoginForm = ({ onLogin }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (email.length < 5) {
-      console.log('email too short')
+      alert('email too short')
       return false
     }
     if (password.length < 5) {
-      console.log('password too short')
+      alert('password too short')
       return false
     }
     onLogin(email, password)
